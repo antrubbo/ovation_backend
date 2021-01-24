@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :date, :time
+  attributes :id, :name, :date, :time
 
   belongs_to :artist
 end
