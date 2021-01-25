@@ -21,21 +21,23 @@ Event.destroy_all
 Ticket.destroy_all
 
 
-
+#Creating Users 
 3.times do
     User.create(name: Faker::Name.name, email: Faker::Internet.email, picture: "https://t3.ftcdn.net/jpg/03/61/60/30/360_F_361603010_gIFE6Gf1MrO2Y2MJ5E8WfJ2I00GKvlzR.jpg"  )
 end
 
-artist_songkick_ids = {
-    "Phoebe Bridgers": 3822376,
-    "Jason Isbell and the 400 Unit": 190529,
-    "The Weeknd": 4363463,
-    "The Killers": 555021,
-    "Kendrick Lamar": 3277856,
-}
+# artist_songkick_ids = {
+#     "Phoebe Bridgers": 3822376,
+#     "Jason Isbell and the 400 Unit": 190529,
+#     "The Weeknd": 4363463,
+#     "The Killers": 555021,
+#     "Kendrick Lamar": 3277856,
+# }
 
+#creating artists
 phoebe = Artist.create(
     name:"Phoebe Bridgers",
+    song_kick_id: 3822376,
     description: "Phoebe Lucille Bridgers (born August 17, 1994)[1] is an American singer-songwriter, guitarist and producer from Los Angeles, California. Best known for her work as a solo artist, she is also known for being part of the musical groups boygenius (with Julien Baker and Lucy Dacus) and Better Oblivion Community Center (with Conor Oberst).",
     genre: "Indie Rock",
     past_performances: [
@@ -47,6 +49,7 @@ phoebe = Artist.create(
 
 jason = Artist.create(
     name:"Jason Isbell and the 400 Unit", 
+    song_kick_id: 190529,
     description: "Former member of Drive-By-Truckers, singer-songwriter Jason Isbell (born February 1st, 1979) went solo in 2007, forging a sound that is instilled with a rootsy, southern swagger, whilst also offering country ballads full of melancholy and themes of redemption.",
     genre: "Alt-Country/Rock",
     past_performances: [
@@ -57,6 +60,7 @@ jason = Artist.create(
 )
 weeknd = Artist.create(
     name: "The Weeknd",  
+    song_kick_id: 4363463, 
     description: "Abel Makkonen Tesfaye (born February 16, 1990), known professionally as the Weeknd, is a Canadian singer, songwriter, and record producer.[1] Noted for his falsetto and eccentric music style,[2][3] Tesfaye is recognized for heavily influencing contemporary R&B and multiple artists.",
     genre: "R&B",
     past_performances: [
@@ -67,6 +71,7 @@ weeknd = Artist.create(
 )
 killers = Artist.create(
     name:"The Killers", 
+    song_kick_id: 555021,
     description: "The Killers are an American rock band formed in Las Vegas in 2001 by Brandon Flowers and Dave Keuning. Since 2002, the band's official lineup has consisted of Flowers, Keuning, Mark Stoermer and Ronnie Vannucci Jr., the latter two having joined the band that year.",
     genre: "Rock/Alternative",
     past_performances: [
@@ -78,6 +83,7 @@ killers = Artist.create(
 
 kendrick = Artist.create(
     name:"Kendrick Lamar", 
+    song_kick_id: 3277856,
     description: "Kendrick Lamar Duckworth (born June 17, 1987) is an American rapper, songwriter, and record producer. Since his mainstream debut in 2012 with Good Kid, M.A.A.D. City, Lamar has been regarded as one of the most influential artists of his generation, as well as one of the greatest rappers and lyricists of all time.",
     genre: "Hip-Hop",
     past_performances: [
@@ -87,15 +93,7 @@ kendrick = Artist.create(
     ]
 )
 
-#Phoebe
-phoebe_response = RestClient.get("https://api.songkick.com/api/3.0/artists/3822376/calendar.json?apikey=zIDG2c72WHINjQ8Y", 
-{per_page: 2})
-phoebe_data = JSON.parse(phoebe_response)
-
-# songkick_request = RestClient.get("https://api.songkick.com/api/3.0/artists/#{}/calendar.json?apikey=zIDG2c72WHINjQ8Y"
-
-
-
+# Creating events after API call 
 def create_event(api_data, artist_id) 
     
     i=0
@@ -151,30 +149,18 @@ def create_event(api_data, artist_id)
 
 end 
 
+#Making the api call 
 def make_api_call 
     
     #For each songkick Id we want to pass the id into the url
     #  parse the response,
     #Send it to our create_event method 
     Artist.all.each do |artist|
-        # byebug
-        # request = RestClient.get("https://api.songkick.com/api/3.0/artists/#{sk_id}/calendar.json?apikey=zIDG2c72WHINjQ8Y")
-        # artist_data = JSON.parse(request)
-        # create_event(artist_data, )
+        request = RestClient.get("https://api.songkick.com/api/3.0/artists/#{artist.song_kick_id}/calendar.json?apikey=zIDG2c72WHINjQ8Y")
+        artist_data = JSON.parse(request)
+        create_event(artist_data, artist.id)
     end 
     
 end 
 
 make_api_call
-#Creating events
-
-# Phoebe Bridgers
-create_event(phoebe_data, phoebe.id)
-
-
-
-
-
-
-# api_resp = RestClient.get("https://api.songkick.com/api/3.0/artists/{artist_id}/calendar.json?apikey={your_api_key}")
-# api_data = JSON.parse(api_resp)
