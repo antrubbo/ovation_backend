@@ -121,7 +121,11 @@ def create_event(api_data, artist_id)
                                 uris << v4
                             end 
                             if k4 === "location"
-                                locations << v4
+                                v4.each do |k5, v5|
+                                    if k5 === "city"
+                                        locations << v5
+                                    end 
+                                end 
                             end 
                             if k4 === "start" 
                                 v4.each do |k5, v5|
