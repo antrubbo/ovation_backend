@@ -13,23 +13,98 @@ require 'byebug'
 
 # for API response - description(displayName), start[date][time]
 
+#  Exmple url "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=kid%20cudi%20live&key=AIzaSyDm0mYxB4CI2wZWva9b53HumoXnKvfeMMY
+# "
 Artist.destroy_all
 User.destroy_all
 Event.destroy_all
 Ticket.destroy_all
 
-response = RestClient.get("https://api.songkick.com/api/3.0/artists/3822376/calendar.json?apikey=zIDG2c72WHINjQ8Y", 
-{per_page: 2})
-data = JSON.parse(response)
 
-def create_event(some_data) 
+
+3.times do
+    User.create(name: Faker::Name.name, email: Faker::Internet.email, picture: "https://t3.ftcdn.net/jpg/03/61/60/30/360_F_361603010_gIFE6Gf1MrO2Y2MJ5E8WfJ2I00GKvlzR.jpg"  )
+end
+
+artist_songkick_ids = {
+    "Phoebe Bridgers": 3822376,
+    "Jason Isbell and the 400 Unit": 190529,
+    "The Weeknd": 4363463,
+    "The Killers": 555021,
+    "Kendrick Lamar": 3277856,
+}
+
+phoebe = Artist.create(
+    name:"Phoebe Bridgers",
+    description: "Phoebe Lucille Bridgers (born August 17, 1994)[1] is an American singer-songwriter, guitarist and producer from Los Angeles, California. Best known for her work as a solo artist, she is also known for being part of the musical groups boygenius (with Julien Baker and Lucy Dacus) and Better Oblivion Community Center (with Conor Oberst).",
+    genre: "Indie Rock",
+    past_performances: [
+        "https://www.youtube.com/watch?v=2bOigld3D1k",
+        "https://www.youtube.com/watch?v=fLYlYwoqeFI",
+        "https://www.youtube.com/watch?v=GSZFJ2_j81w"
+    ]
+)
+
+jason = Artist.create(
+    name:"Jason Isbell and the 400 Unit", 
+    description: "Former member of Drive-By-Truckers, singer-songwriter Jason Isbell (born February 1st, 1979) went solo in 2007, forging a sound that is instilled with a rootsy, southern swagger, whilst also offering country ballads full of melancholy and themes of redemption.",
+    genre: "Alt-Country/Rock",
+    past_performances: [
+        "https://www.youtube.com/watch?v=fs2JLLqh91A",
+        "https://www.youtube.com/watch?v=31mWelcliRs",
+        "https://www.youtube.com/watch?v=r3Mc9YgnBm8"
+    ]
+)
+weeknd = Artist.create(
+    name: "The Weeknd",  
+    description: "Abel Makkonen Tesfaye (born February 16, 1990), known professionally as the Weeknd, is a Canadian singer, songwriter, and record producer.[1] Noted for his falsetto and eccentric music style,[2][3] Tesfaye is recognized for heavily influencing contemporary R&B and multiple artists.",
+    genre: "R&B",
+    past_performances: [
+        "https://www.youtube.com/watch?v=R4m35Wk_-Zk",
+        "https://www.youtube.com/watch?v=mAcQRgPWZDE",
+        "https://www.youtube.com/watch?v=4H7imo5pG94"
+    ]
+)
+killers = Artist.create(
+    name:"The Killers", 
+    description: "The Killers are an American rock band formed in Las Vegas in 2001 by Brandon Flowers and Dave Keuning. Since 2002, the band's official lineup has consisted of Flowers, Keuning, Mark Stoermer and Ronnie Vannucci Jr., the latter two having joined the band that year.",
+    genre: "Rock/Alternative",
+    past_performances: [
+        "https://www.youtube.com/watch?v=IdWZgTvf4t0",
+        "https://www.youtube.com/watch?v=QVlfINuDdKE",
+        "https://www.youtube.com/watch?v=8ocHoTqm-J4"
+    ]
+)
+
+kendrick = Artist.create(
+    name:"Kendrick Lamar", 
+    description: "Kendrick Lamar Duckworth (born June 17, 1987) is an American rapper, songwriter, and record producer. Since his mainstream debut in 2012 with Good Kid, M.A.A.D. City, Lamar has been regarded as one of the most influential artists of his generation, as well as one of the greatest rappers and lyricists of all time.",
+    genre: "Hip-Hop",
+    past_performances: [
+        "https://www.youtube.com/watch?v=sop2V_MREEI",
+        "https://www.youtube.com/watch?v=g5Jgy-33t-M",
+        "https://www.youtube.com/watch?v=BTvV9JyNaS8"
+    ]
+)
+
+#Phoebe
+phoebe_response = RestClient.get("https://api.songkick.com/api/3.0/artists/3822376/calendar.json?apikey=zIDG2c72WHINjQ8Y", 
+{per_page: 2})
+phoebe_data = JSON.parse(phoebe_response)
+
+# songkick_request = RestClient.get("https://api.songkick.com/api/3.0/artists/#{}/calendar.json?apikey=zIDG2c72WHINjQ8Y"
+
+
+
+def create_event(api_data, artist_id) 
     
+    i=0
     display_names = []
     uris = []
     dates = []
     times = []
 
-    some_data.each do |key, value|
+    api_data.each do |key, value|
         value.each do |k2, v2|
             if k2 == "results"
                 v2.each do |k3, v3|
@@ -61,19 +136,44 @@ def create_event(some_data)
             end 
         end 
     end 
-    
+
+    loop_times = 5 
+
+    if display_names.length < loop_times 
+        loop_times = display_names.length
+    end 
+ 
+    loop_times.times do 
+        Event.create(name: display_names[i], event_url: uris[i], date: dates[i], time: times[i], artist_id: artist_id)
+        # byebug
+        i += 1
+    end 
 
 end 
 
-create_event(data)
+def make_api_call 
+    
+    #For each songkick Id we want to pass the id into the url
+    #  parse the response,
+    #Send it to our create_event method 
+    Artist.all.each do |artist|
+        # byebug
+        # request = RestClient.get("https://api.songkick.com/api/3.0/artists/#{sk_id}/calendar.json?apikey=zIDG2c72WHINjQ8Y")
+        # artist_data = JSON.parse(request)
+        # create_event(artist_data, )
+    end 
+    
+end 
 
-artist_ids = {
-    "Phoebe Bridgers": 3822376
-}
+make_api_call
+#Creating events
 
-3.times do
-    User.create(name: Faker::name, email: Faker::Internet.email, picture: "https://t3.ftcdn.net/jpg/03/61/60/30/360_F_361603010_gIFE6Gf1MrO2Y2MJ5E8WfJ2I00GKvlzR.jpg"  )
-end
+# Phoebe Bridgers
+create_event(phoebe_data, phoebe.id)
+
+
+
+
 
 
 # api_resp = RestClient.get("https://api.songkick.com/api/3.0/artists/{artist_id}/calendar.json?apikey={your_api_key}")
