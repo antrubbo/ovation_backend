@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   resources :events
   resources :artists
   resources :users
+
+  get "/autologin", to: "auth#autologin"
   
 end
