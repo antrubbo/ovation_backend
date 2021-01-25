@@ -1,4 +1,4 @@
 class ArtistSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :genre, :past_performances
+  attributes :id, :name, :description, :genre, :picture, :past_performances
 
 end

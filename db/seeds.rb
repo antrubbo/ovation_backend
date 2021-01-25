@@ -106,6 +106,7 @@ def create_event(api_data, artist_id)
     uris = []
     dates = []
     times = []
+    locations = []
 
     api_data.each do |key, value|
         value.each do |k2, v2|
@@ -118,6 +119,9 @@ def create_event(api_data, artist_id)
                             end 
                             if k4 === "uri"
                                 uris << v4
+                            end 
+                            if k4 === "location"
+                                locations << v4
                             end 
                             if k4 === "start" 
                                 v4.each do |k5, v5|
@@ -147,7 +151,7 @@ def create_event(api_data, artist_id)
     end 
  
     loop_times.times do 
-        Event.create(name: display_names[i], event_url: uris[i], date: dates[i], time: times[i], artist_id: artist_id)
+        Event.create(name: display_names[i], location: locations[i], event_url: uris[i], date: dates[i], time: times[i], artist_id: artist_id)
         # byebug
         i += 1
     end 

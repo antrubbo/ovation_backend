@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_205553) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "event_url"
+    t.string "location"
     t.date "date"
     t.time "time"
     t.bigint "artist_id", null: false
