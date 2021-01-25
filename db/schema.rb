@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_205553) do
     t.string "description"
     t.string "genre"
     t.integer "song_kick_id"
+    t.string "picture"
     t.string "past_performances", array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
