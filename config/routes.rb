@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :artists
   resources :users
 
+
+  post '/login', to: 'users#login'
   get "/autologin", to: "auth#autologin"
   
 end

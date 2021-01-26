@@ -10,13 +10,15 @@ class UsersController < ApplicationController
         end
     end 
 
-    def show
-        user = @currentUser
+    def login
+        user = User.find_by(email: params[:email])
+
         if user
             render json: user 
         else  
-            render json: {error: "Unauthorized request"}, status: :unauthorized
+            render json: {errors: user.errors.full_messages}, status: :unauthorized
         end
+
     end
     
 
