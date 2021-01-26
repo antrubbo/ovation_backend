@@ -13,9 +13,20 @@ class TicketsController < ApplicationController
 
     def index
         tickets = Ticket.all
-
         render json: tickets
     end 
+
+    def destroy
+        ticket = Ticket.find_by(id: params[:id])
+        ticket.destroy
+
+        if ticket
+            render json: {errors: 'This ticket still exists'}
+        else 
+            render json: {success: 'Sucessfully deleted'}
+        end 
+
+    end
 
     private 
     def ticket_params 
