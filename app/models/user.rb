@@ -2,5 +2,8 @@ class User < ApplicationRecord
     has_many :tickets, dependent: :destroy
     has_many :events, through: :users
 
-    # validates_presence_of :name, :email
+    validates :name, :email, presence: true
+    validates :email, uniqueness:
+        {message: 'An account associated with %{value} already exists'}
+        
 end
