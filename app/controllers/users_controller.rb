@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     def show
         user = User.last
         if user
-            render jons: user 
+            render json: user 
         else  
             render json: {error: "Unauthorized request"}, status: :unauthorized
         end
