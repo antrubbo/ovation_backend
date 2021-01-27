@@ -26,14 +26,6 @@ Ticket.destroy_all
     User.create(name: Faker::Name.name, email: Faker::Internet.email, picture: "https://t3.ftcdn.net/jpg/03/61/60/30/360_F_361603010_gIFE6Gf1MrO2Y2MJ5E8WfJ2I00GKvlzR.jpg"  )
 end
 
-# artist_songkick_ids = {
-#     "Phoebe Bridgers": 3822376,
-#     "Jason Isbell and the 400 Unit": 190529,
-#     "The Weeknd": 4363463,
-#     "The Killers": 555021,
-#     "Kendrick Lamar": 3277856,
-# }
-
 #creating artists
 phoebe = Artist.create(
     name:"Phoebe Bridgers",
@@ -67,7 +59,7 @@ weeknd = Artist.create(
     genre: "R&B",
     picture: "https://www.biography.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTU3NTY4MjczNjAzMzcyOTM5/the-weeknd.jpg",
     past_performances: [
-        "https://www.youtube.com/watch?v=R4m35Wk_-Zk",
+        "https://www.youtube.com/watch?v=ewfdRy5jfF8",
         "https://www.youtube.com/watch?v=mAcQRgPWZDE",
         "https://www.youtube.com/watch?v=4H7imo5pG94"
     ]
@@ -95,6 +87,83 @@ kendrick = Artist.create(
         "https://www.youtube.com/watch?v=sop2V_MREEI",
         "https://www.youtube.com/watch?v=g5Jgy-33t-M",
         "https://www.youtube.com/watch?v=BTvV9JyNaS8"
+    ]
+)
+
+gaga = Artist.create(
+    name:"Lady Gaga", 
+    song_kick_id: 974908,
+    description: "Stefani Joanne Angelina Germanotta, known professionally as Lady Gaga, is an American singer, songwriter, and actress. She is known for her consistent image reinventions and versatility in both music and entertainment.",
+    genre: "Pop",
+    picture: "https://ca-times.brightspotcdn.com/dims4/default/6cc152f/2147483647/strip/true/crop/2048x1151+0+0/resize/840x472!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fd2%2F35%2F29b7ac6fbd0df6c16ced1776cc24%2Fla-1535430818-py4nyenox5-snap-image",
+    past_performances: [
+        "https://www.youtube.com/watch?v=NCEcWA0wy_E",
+        "https://www.youtube.com/watch?v=LoG04Nyea8",
+        "https://www.youtube.com/watch?v=q3ues1stefk"
+    ]
+)
+
+bieber = Artist.create(
+    name:"Justin Bieber", 
+    song_kick_id: 2596951,
+    description: "Justin Drew Bieber is a Canadian singer, songwriter and multi-instrumentalist. Discovered at age 13 by talent manager Scooter Braun after he had watched Bieber's YouTube cover song videos, Bieber was signed to RBMG Records in 2008.",
+    genre: "Pop",
+    picture: "https://lh3.googleusercontent.com/pW7Jv2o8g0bkXFi11hrumm_N0e7KAf5pc5bawoSdD44uTLAYQi-Eeh1t1HileeiMx-9pXN6hQROW-OBEzWQWcEs2",
+    past_performances: [
+        "https://www.youtube.com/watch?v=djzDWMy1z7k",
+        "https://www.youtube.com/watch?v=ZAFgWhzvivM",
+        "https://www.youtube.com/watch?v=ITAkDYJDsS4"
+    ]
+)
+
+queen = Artist.create(
+    name:"Queen + Adam Lambert", 
+    song_kick_id: 469904,
+    description: "Queen are a British rock band formed in London in 1970. Their classic line-up was Freddie Mercury, Brian May, Roger Taylor and John Deacon, now fronted by Adam Lambert.",
+    genre: "Rock",
+    picture: "https://i.ytimg.com/vi/kgQzrUwFfNg/maxresdefault.jpg",
+    past_performances: [
+        "https://www.youtube.com/watch?v=eH5aH2F4BaM",
+        "https://www.youtube.com/watch?v=qvbhfrwldEs",
+        "https://www.youtube.com/watch?v=odtNNiIzv1k"
+    ]
+)
+
+saves = Artist.create(
+    name:"Saves The Day", 
+    song_kick_id: 398681,
+    description: "Saves The Day are an American band signed to Vagrant Records. The band are known for their: emo, pop punk and indie rock music.",
+    genre: "Rock",
+    picture: "https://www.rollingstone.com/wp-content/uploads/2019/10/saves-the-day.jpeg",
+    past_performances: [
+        "https://www.youtube.com/watch?v=Kbvp5z_aIXY",
+        "https://www.youtube.com/watch?v=23ugXw284lU",
+        "https://www.youtube.com/watch?v=O7-EwoezhUc"
+    ]
+)
+
+leon = Artist.create(
+    name:"Kings of Leon", 
+    song_kick_id: 2847,
+    description: "Kings of Leon (formed in 2000) is an American alternative family rock band hailing from Nashville, Tennessee, in the U.S.",
+    genre: "Rock",
+    picture: "https://images.sk-static.com/images/media/img/col6/20160826-192622-585983.jpg",
+    past_performances: [
+        "https://www.youtube.com/watch?v=lKeUCkBO8QA",
+        "https://www.youtube.com/watch?v=j6pcQb55G2Q",
+        "https://www.youtube.com/watch?v=E1y9-7EUIg0"
+    ]
+)
+tom = Artist.create(
+    name:"Tom Misch", 
+    song_kick_id: 8341698,
+    description: "Thomas Abraham Misch is an English musician and producer. He began releasing music on SoundCloud in 2012 and released his debut studio album Geography in 2018. In 2020, he released his second studio album What Kinda Music in collaboration with English jazz drummer Yussef Dayes, distributed through Blue Note Records.",
+    genre: "Funk/Jazz/Neo-Soul",
+    picture: "https://www.jazzavienne.com/sites/jazzavienne/files/styles/field_visuel_principal_contenu/public/thumbnails/image/tom_misch_tunnel.png?itok=yAdxLb3N",
+    past_performances: [
+        "https://www.youtube.com/watch?v=X_1cgHy4M7E",
+        "https://www.youtube.com/watch?v=IUMTaAQ43lY",
+        "https://www.youtube.com/watch?v=Lox1eHqvEzI"
     ]
 )
 
@@ -156,18 +225,14 @@ def create_event(api_data, artist_id)
  
     loop_times.times do 
         Event.create(name: display_names[i], location: locations[i], event_url: uris[i], date: dates[i], time: times[i], artist_id: artist_id)
-        # byebug
         i += 1
     end 
 
 end 
 
 #Making the api call 
+
 def make_api_call 
-    
-    #For each songkick Id we want to pass the id into the url
-    #  parse the response,
-    #Send it to our create_event method 
     Artist.all.each do |artist|
         request = RestClient.get("https://api.songkick.com/api/3.0/artists/#{artist.song_kick_id}/calendar.json?apikey=zIDG2c72WHINjQ8Y")
         artist_data = JSON.parse(request)
@@ -176,5 +241,4 @@ def make_api_call
     
 end 
 
-#Make the api call 
 make_api_call
