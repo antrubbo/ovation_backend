@@ -21,9 +21,9 @@ class TicketsController < ApplicationController
         ticket.destroy
 
         if ticket
-            render json: {errors: 'This ticket still exists'}
-        else 
             render json: {success: 'Sucessfully deleted'}
+        else 
+            render json: {errors: 'Ticket still exists'}
         end 
 
     end

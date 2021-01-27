@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
 
   post '/login', to: 'users#login'
-  get "/autologin", to: "auth#autologin"
   delete "/user/:id", to: "users#destroy"
   
 end

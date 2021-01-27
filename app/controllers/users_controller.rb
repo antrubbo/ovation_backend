@@ -40,9 +40,15 @@ class UsersController < ApplicationController
         if user.valid?
             render json: user
         else 
-            render jso
+            render json: {errors: user.errors.full_messages}
         end 
     end 
+
+    def destroy
+        user = User.find_by(id: params[:id])
+        user.destroy 
+        render json: user
+    end
 
     private 
 
