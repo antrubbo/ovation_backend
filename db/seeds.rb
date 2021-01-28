@@ -98,7 +98,7 @@ gaga = Artist.create(
     picture: "https://ca-times.brightspotcdn.com/dims4/default/6cc152f/2147483647/strip/true/crop/2048x1151+0+0/resize/840x472!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fd2%2F35%2F29b7ac6fbd0df6c16ced1776cc24%2Fla-1535430818-py4nyenox5-snap-image",
     past_performances: [
         "https://www.youtube.com/watch?v=NCEcWA0wy_E",
-        "https://www.youtube.com/watch?v=LoG04Nyea8",
+        "https://www.youtube.com/watch?v=5D4vjndnB0w",
         "https://www.youtube.com/watch?v=q3ues1stefk"
     ]
 )
