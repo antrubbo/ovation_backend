@@ -22,9 +22,12 @@ Ticket.destroy_all
 
 
 #Creating Users 
-3.times do
-    User.create(name: Faker::Name.name, email: Faker::Internet.email, picture: "https://t3.ftcdn.net/jpg/03/61/60/30/360_F_361603010_gIFE6Gf1MrO2Y2MJ5E8WfJ2I00GKvlzR.jpg"  )
-end
+# 3.times do
+#     User.create(name: Faker::Name.name, email: Faker::Internet.email, picture: "https://t3.ftcdn.net/jpg/03/61/60/30/360_F_361603010_gIFE6Gf1MrO2Y2MJ5E8WfJ2I00GKvlzR.jpg"  )
+# end
+User.create(name: "Anthony", email: "anthony.rubbo@gmail.com",
+    picture: "https://images.squarespace-cdn.com/content/v1/5a4f9f16ccc5c5504456e2a7/1562716418172-E7CY3CI5N151B6GSPLK0/ke17ZwdGBToddI8pDm48kPjjuPFa0G8ug6tTgAyzZM97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0r9YoV8ytu8SWDj21Bt3yU95gDueuvxTE97yqKtmyLaG0xMWyUiQHfzKXGxgPgNvsw/07022019_AnthonyRubbo_131.jpg?format=750w", password: "123abc")
+User.create(name: "Ekene", email: "ekene@gmail.com",picture: "https://miro.medium.com/max/3150/1*aoZai5bRkjOVB0XST5DrTA.jpeg", password: "hello")
 
 #creating artists
 phoebe = Artist.create(
