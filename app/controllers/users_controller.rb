@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+    def index
+        users = User.all 
+        render json: users
+    end 
     
     def create 
         user = User.create(user_params)
@@ -10,16 +14,25 @@ class UsersController < ApplicationController
         end
     end 
 
-    def login
-        user = User.find_by(email: params[:email])
+    # def login
+    #     user = User.find_by(email: params[:email])
         
-        if user
-            render json: user 
-        else  
-            render json: {errors: "Email or password does not match our records"},
-            status: :unauthorized
-        end
+    #     if user
+    #         render json: user 
+    #     else  
+    #         render json: {errors: "Email or password does not match our records"},
+    #         status: :unauthorized
+    #     end
 
+    # end
+
+    def profile   
+        user = AuthorizeRequest.new(request.headers).user
+        if user
+            render json: user
+        else
+            render json: {error: "Unauthorized Request"}, status: :unauthorized
+        end
     end
 
     def show
