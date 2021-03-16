@@ -18,7 +18,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'active-model-serializer'
 gem 'active_model_serializers', '~> 0.10.4'
 gem 'rest-client'
-gem 'json'
+gem "json", ">= 2.3.0"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
