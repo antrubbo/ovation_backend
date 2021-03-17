@@ -14,18 +14,6 @@ class UsersController < ApplicationController
         end
     end 
 
-    # def login
-    #     user = User.find_by(email: params[:email])
-        
-    #     if user
-    #         render json: user 
-    #     else  
-    #         render json: {errors: "Email or password does not match our records"},
-    #         status: :unauthorized
-    #     end
-
-    # end
-
     def profile   
         user = AuthorizeRequest.new(request.headers).user
         if user
