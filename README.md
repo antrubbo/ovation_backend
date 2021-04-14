@@ -12,7 +12,7 @@ Ovation is a site for finding events/concerts in your area.   A few notable user
 
 The event data, provided by songkick, is real and accurate. 
 
-This is the front end only. [The back end](www.github.com/antrubbo/ovation_backend) was created as a separate repository for ease of deployment. 
+This is the back end only. [The front end](https://github.com/antrubbo/ovation_frontend) was created as a separate repository for ease of deployment. 
 
 
 ## Technologies
@@ -23,6 +23,8 @@ This is the front end only. [The back end](www.github.com/antrubbo/ovation_backe
 * CSS
 * HTML
 
+[Take a look at our frontend repo here](https://github.com/antrubbo/ovation_frontend)
+
 #### Backend 
 
 * Ruby on Rails 
@@ -32,7 +34,6 @@ This is the front end only. [The back end](www.github.com/antrubbo/ovation_backe
 ### APIs
 * [Songkick API ](www.songkick.com/developer)
 
-[Take a look at our backend repo here](https://github.com/antrubbo/ovation_backend)
 
 ## Project Status
 
